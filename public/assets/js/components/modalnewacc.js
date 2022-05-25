@@ -12,19 +12,17 @@ const modalForm = {
                     </div>
                     <div class="modal-body">                        
                         <div class="row">
-                            <form action="#" method="post" @submit.prevent="saveData">
+                            <form method="post" @submit.prevent="saveData">
                                 <div class="col-md-12">
                                     <label class="form-label">Usuário:</label>
-                                    <input class="form-control" v-model="username" type="text" name="username" placeholder="Usuário">
+                                    <input class="form-control" v-model="create_username" type="text" name="create_username" placeholder="Usuário">
                                 </div>
-                                <div v-if="errors.username">{{errors.username}}</div>                                
+                                <div v-if="errors.create_username">{{errors.create_username}}</div>                                
                                 <div class="col-md12 mt-3">
                                     <label class="form-label">Senha:</label>
-                                    <input class="form-control" v-model="password" type="password" name="password" placeholder="Senha">
+                                    <input class="form-control" v-model="create_password" type="password" name="create_password" placeholder="Senha">
                                 </div>
-                                <div v-if="errors.password">{{errors.password}}</div>                                
-                                
-                                <label></label>                                
+                                <div v-if="errors.create_password">{{errors.create_password}}</div>                    
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
@@ -40,27 +38,42 @@ const modalForm = {
     data() {
         return {
             tittle: 'Create Account',
-            username: '',
+            create_username: '',
+            create_password: '',
 
             errors: {
-                username: ''
+                create_username: '',
+                create_password: '',
             }
         }
     },
     methods: {
         saveData() {
             this.reset()
-            if (this.username === '') {
-                this.errors.username = 'Por favor informe um nome de usuário!'
 
-                return
+            if(this.create_username && this.create_password) {
+                console.log(this.create_username)
+                return true;
             }
-            console.log(this.username)
-            
+
+            if (this.create_username === '') {
+                this.errors.create_username = 'Por favor informe um nome de usuário!';
+
+                return;
+            }
+
+            if(this.create_password === '') {
+                this.errors.create_password = 'Por favor informe uma senha!';
+
+                return;
+            }
+             
         },
+        
         reset() {
             this.errors = {
-                name: ''
+                create_username: '',
+                create_password: ''
             }
         }
     }

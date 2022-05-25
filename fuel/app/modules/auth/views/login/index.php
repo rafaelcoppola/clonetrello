@@ -32,16 +32,21 @@
                 <div class="col-md-6 col-lg-5 col-xl-5 offset-xl-1">
                     <h1>TrelloClone</h1>
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-                    <form>
+                    <?php echo Form::open(); ?>
+                        <?php if (Session::get_flash('error')) : ?>
+                            <div class="alert alert-danger text-center">
+                                <?php echo Session::get_flash('error') ?>
+                            </div>
+                        <?php endif; ?>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                            <input type="email" id="form1Example13" class="form-control form-control-lg" name="username">
                             <label class="form-label" for="form1Example13">Email address</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-4">
-                            <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                            <input type="password" id="form1Example23" class="form-control form-control-lg" name="password">
                             <label class="form-label" for="form1Example23">Password</label>
                         </div>
 
@@ -60,9 +65,8 @@
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
-                        <modal-form></modal-form>
-
-                    </form>
+                    <?php echo Form::close(); ?>
+                    <modal-form></modal-form>
                 </div>
             </div>
             <!-- <button>Open Modal</button> -->
